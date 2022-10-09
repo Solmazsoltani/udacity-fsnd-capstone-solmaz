@@ -55,9 +55,20 @@ This will install all of the required packages we selected within the `requireme
 #### Database Setup
 With Postgres running, restore a database using the `capstone.psql` file provided. In terminal run:
 
-```bash
-createdb capstone
-psql capstone < capstone.psql
+``` CLI ``` you should be in the Directory of your psql file for example cd C:\Users\nx018125\Documents\GitHub\udacity-fsnd-capstone-solmaz
+
+createdb is a command line utility which you can run from bash and not from psql. To create a database from psql, use the create database statement like so:
+
+create database [databasename];
+Note: be sure to always end your SQL statements with ;
+
+
+create database [databasename];
+
+
+create database capstone;
+
+psql capstone < capstone.psql postgres
 ```
 
 #### Running Tests

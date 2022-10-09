@@ -119,8 +119,8 @@ Following permissions should be created under created API settings.
 * `post:Buyers`
 * `update:Buyers`
 * `update:Autos`
-* `post:movies`
-* `delete:movies`
+* `post:Autos`
+* `delete:Autos`
 
 ##### Set JWT Tokens in `auth_config.json`
 

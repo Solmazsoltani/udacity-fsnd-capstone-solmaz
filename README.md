@@ -69,9 +69,10 @@ create database [databasename];
 create database capstone;
 
 psql capstone < capstone.psql postgres
-```
+
 
 #### Running Tests
+
 To run the tests, run
 ```bash
 dropdb capstone_test

@@ -99,26 +99,26 @@ export API_AUDIENCE="capstone" # Create an API in Auth0
 
 Create three roles for users under `Users & Roles` section in Auth0
 
-* Casting Assistant
-	* Can view actors and movies
-* Casting Director
-	* All permissions a Casting Assistant has and…
-	* Add or delete an actor from the database
-	* Modify actors or movies
+* Sell Assistant
+	* Can view Autos and Auto Buyers
+* Sell Manager
+	* All permissions a Sell Assistant has and…
+	* Add or delete an Buyer from the database
+	* Modify Buyers or Autos
 * Executive Producer
-	* All permissions a Casting Director has and…
-	* Add or delete a movie from the database
+	* All permissions a Sell Manager has and…
+	* Add or delete a Car from the database
 
 ##### Permissions
 
 Following permissions should be created under created API settings.
 
-* `view:actors`
-* `view:movies`
-* `delete:actors`
-* `post:actors`
-* `update:actors`
-* `update:movies`
+* `view:Buyers`
+* `view:Autos`
+* `delete:Buyers`
+* `post:Buyers`
+* `update:Buyers`
+* `update:Autos`
 * `post:movies`
 * `delete:movies`
 

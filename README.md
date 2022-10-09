@@ -1,8 +1,8 @@
-# Casting Agency Project
+# Sells Agency Project
 Udacity Full-Stack Web Developer Nanodegree Program Capstone Project
 
 ## Project Motivation
-The Casting Agency Project models a company that is responsible for creating movies and managing and assigning actors to those movies. You are an Executive Producer within the company and are creating a system to simplify and streamline your process. 
+The Sells Agency Project models a company that is responsible for creating Autos and managing and assigning Buyers to those Autos. You are an Executive Producer within the company and are creating a system to simplify and streamline your process. 
 
 
 This project is simply a workspace for practicing and showcasing different set of skills related with web development. These include data modelling, API design, authentication and authorization and cloud deployment.
@@ -208,35 +208,35 @@ The API will return three error types when requests fail:
 #### GET /Autos 
 * Get all Autoss
 
-* Require `view:movies` permission
+* Require `view:Autos` permission
 
-* **Example Request:** `curl 'http://localhost:5000/movies'`
+* **Example Request:** `curl 'http://localhost:5000/Autos'`
 
 * **Expected Result:**
     ```json
 	{
-		"movies": [
+		"Autos": [
 			{
-			"actors": [
+			"Buyers": [
 				{
 				"age": 54,
 				"gender": "M",
 				"id": 1,
-				"movie_id": 2,
+				"Auto_id": 2,
 				"name": "Tom Hanks"
 				},
 				{
 				"age": 45,
 				"gender": "M",
 				"id": 4,
-				"movie_id": 2,
+				"Auto_id": 2,
 				"name": "Robert Downey, Jr."
 				},
 				{
 				"age": 45,
 				"gender": "F",
 				"id": 5,
-				"movie_id": 2,
+				"Auto_id": 2,
 				"name": "Julia Roberts"
 				}
 			],
@@ -250,36 +250,36 @@ The API will return three error types when requests fail:
     }
     ```
 	
-#### GET /actors 
-* Get all actors
+#### GET /Buyers 
+* Get all Buyers
 
-* Requires `view:actors` permission
+* Requires `view:Buyers` permission
 
-* **Example Request:** `curl 'http://localhost:5000/actors'`
+* **Example Request:** `curl 'http://localhost:5000/Buyers'`
 
 * **Expected Result:**
     ```json
 	{
-		"actors": [
+		"Buyers": [
 			{
 			"age": 45,
 			"gender": "M",
 			"id": 6,
-			"movie_id": 1,
+			"Auto_id": 1,
 			"name": "Cem Yılmaz"
 			},
 			{
 			"age": 54,
 			"gender": "M",
 			"id": 1,
-			"movie_id": 2,
+			"Auto_id": 2,
 			"name": "Tom Hanks"
 			},
 			{
 			"age": 44,
 			"gender": "M",
 			"id": 2,
-			"movie_id": 3,
+			"Auto_id": 3,
 			"name": "Brad Pitt"
 			}
 		],
@@ -287,16 +287,16 @@ The API will return three error types when requests fail:
 	}
 	```
 	
-#### POST /movies
-* Creates a new movie.
+#### POST /Autos
+* Creates a new Auto.
 
-* Requires `post:movies` permission
+* Requires `post:Autos` permission
 
 * Requires the title and release date.
 
 * **Example Request:** (Create)
     ```bash
-	curl --location --request POST 'http://localhost:5000/movies' \
+	curl --location --request POST 'http://localhost:5000/Autos' \
 		--header 'Content-Type: application/json' \
 		--data-raw '{
 			"title": "Pek Yakında",
@@ -311,16 +311,16 @@ The API will return three error types when requests fail:
 	}
     ```
 
-#### POST /actors
-* Creates a new actor.
+#### POST /Buyers
+* Creates a new Buyer.
 
-* Requires `post:actors` permission
+* Requires `post:Buyers` permission
 
-* Requires the name, age and gender of the actor.
+* Requires the name, age and gender of the Buyer.
 
 * **Example Request:** (Create)
     ```json
-	curl --location --request POST 'http://localhost:5000/actors' \
+	curl --location --request POST 'http://localhost:5000/Buyers' \
 		--header 'Content-Type: application/json' \
 		--data-raw '{
 			"name": "Cem Yılmaz",
@@ -336,12 +336,12 @@ The API will return three error types when requests fail:
     }
     ```
 
-#### DELETE /movies/<int:movie_id>
-* Deletes the movie with given id 
+#### DELETE /Autos/<int:Auto_id>
+* Deletes the Auto with given id 
 
-* Require `delete:movies` permission
+* Require `delete:Autos` permission
 
-* **Example Request:** `curl --request DELETE 'http://localhost:5000/movies/1'`
+* **Example Request:** `curl --request DELETE 'http://localhost:5000/Autos/1'`
 
 * **Example Response:**
     ```json
@@ -351,12 +351,12 @@ The API will return three error types when requests fail:
     }
     ```
     
-#### DELETE /actors/<int:actor_id>
-* Deletes the actor with given id 
+#### DELETE /Buyers/<int:Buyer_id>
+* Deletes the Buyer with given id 
 
-* Require `delete:actors` permission
+* Require `delete:Buyers` permission
 
-* **Example Request:** `curl --request DELETE 'http://localhost:5000/actors/1'`
+* **Example Request:** `curl --request DELETE 'http://localhost:5000/Buyers/1'`
 
 * **Example Response:**
     ```json
@@ -366,18 +366,18 @@ The API will return three error types when requests fail:
     }
     ```
 
-#### PATCH /movies/<movie_id>
-* Updates the movie where <movie_id> is the existing movie id
+#### PATCH /Autos/<Auto_id>
+* Updates the Auto where <Auto_id> is the existing Auto id
 
-* Require `update:movies` permission
+* Require `update:Autos` permission
 
-* Responds with a 404 error if <movie_id> is not found
+* Responds with a 404 error if <Auto_id> is not found
 
-* Update the corresponding fields for Movie with id <movie_id>
+* Update the corresponding fields for Auto with id <Auto_id>
 
 * **Example Request:** 
 	```json
-    curl --location --request PATCH 'http://localhost:5000/movies/1' \
+    curl --location --request PATCH 'http://localhost:5000/Autos/1' \
 		--header 'Content-Type: application/json' \
 		--data-raw '{
 			"title": "Eyvah eyvah 2"
@@ -396,18 +396,18 @@ The API will return three error types when requests fail:
     }
     ```
 	
-#### PATCH /actors/<actor_id>
-* Updates the actor where <actor_id> is the existing actor id
+#### PATCH /Buyers/<Buyer_id>
+* Updates the Buyer where <Buyer_id> is the existing Buyer id
 
-* Require `update:actors`
+* Require `update:Buyers`
 
-* Responds with a 404 error if <actor_id> is not found
+* Responds with a 404 error if <Buyer_id> is not found
 
-* Update the given fields for Actor with id <actor_id>
+* Update the given fields for Buyer with id <Buyer_id>
 
 * **Example Request:** 
 	```json
-    curl --location --request PATCH 'http://localhost:5000/actors/1' \
+    curl --location --request PATCH 'http://localhost:5000/Buyers/1' \
 		--header 'Content-Type: application/json' \
 		--data-raw '{
 			"name": "Tom Hanks"

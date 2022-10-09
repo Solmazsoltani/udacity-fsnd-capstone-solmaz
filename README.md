@@ -134,14 +134,15 @@ https://{{YOUR_DOMAIN}}/authorize?audience={{API_IDENTIFIER}}&response_type=toke
 
 1. Initialize and activate a virtualenv:
 
-   ```bash
-   virtualenv --no-site-packages env_capstone
-   source env_capstone/bin/activate
+   ```
+   py -m venv env
+   .\env\Scripts\activate
+   
    ```
 
 2. Install the dependencies:
 
-    ```bash
+    ```
     pip install -r requirements.txt
     ```
 3. Configure database path to connect local postgres database in `models.py`
@@ -175,10 +176,10 @@ For more details [look at the documentation (31.1.1.2. Connection URIs)](https:/
 
 ### Models
 There are two models:
-* Movie
-	* title
-	* release_date
-* Actor
+* Auto
+	* name
+	* produce_date
+* Buyer
 	* name
 	* age
 	* gender
@@ -204,8 +205,8 @@ The API will return three error types when requests fail:
 ### Endpoints
 
 
-#### GET /movies 
-* Get all movies
+#### GET /Autos 
+* Get all Autoss
 
 * Require `view:movies` permission
 

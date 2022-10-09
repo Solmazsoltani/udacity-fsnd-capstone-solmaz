@@ -35,7 +35,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: CarOwner; Type: TABLE; Schema: public; Owner: Solmaz
+-- Name: CarOwner; Type: TABLE; Schema: public; Owner: Postgres
 --
 
 CREATE TABLE public.CarOwner (
@@ -47,10 +47,10 @@ CREATE TABLE public.CarOwner (
 );
 
 
-ALTER TABLE public.CarOwner OWNER TO Solmaz;
+ALTER TABLE public.CarOwner OWNER TO Postgres;
 
 --
--- Name: CarOwner_id_seq; Type: SEQUENCE; Schema: public; Owner: Solmaz
+-- Name: CarOwner_id_seq; Type: SEQUENCE; Schema: public; Owner: Postgres
 --
 
 CREATE SEQUENCE public.CarOwner_id_seq
@@ -62,17 +62,17 @@ CREATE SEQUENCE public.CarOwner_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.CarOwner_id_seq OWNER TO Solmaz;
+ALTER TABLE public.CarOwner_id_seq OWNER TO Postgres;
 
 --
--- Name: CarOwner_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Solmaz
+-- Name: CarOwner_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Postgres
 --
 
 ALTER SEQUENCE public.CarOwner_id_seq OWNED BY public.CarOwner.id;
 
 
 --
--- Name: alembic_version; Type: TABLE; Schema: public; Owner: Solmaz
+-- Name: alembic_version; Type: TABLE; Schema: public; Owner: Postgres
 --
 
 CREATE TABLE public.alembic_version (
@@ -80,10 +80,10 @@ CREATE TABLE public.alembic_version (
 );
 
 
-ALTER TABLE public.alembic_version OWNER TO Solmaz;
+ALTER TABLE public.alembic_version OWNER TO Postgres;
 
 --
--- Name: Cars; Type: TABLE; Schema: public; Owner: Solmaz
+-- Name: Cars; Type: TABLE; Schema: public; Owner: Postgres
 --
 
 CREATE TABLE public.Cars (
@@ -93,10 +93,10 @@ CREATE TABLE public.Cars (
 );
 
 
-ALTER TABLE public.Cars OWNER TO Solmaz;
+ALTER TABLE public.Cars OWNER TO Postgres;
 
 --
--- Name: Cars_id_seq; Type: SEQUENCE; Schema: public; Owner: Solmaz
+-- Name: Cars_id_seq; Type: SEQUENCE; Schema: public; Owner: Postgres
 --
 
 CREATE SEQUENCE public.Cars_id_seq
@@ -108,31 +108,31 @@ CREATE SEQUENCE public.Cars_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.Cars_id_seq OWNER TO Solmaz;
+ALTER TABLE public.Cars_id_seq OWNER TO Postgres;
 
 --
--- Name: Cars_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Solmaz
+-- Name: Cars_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Postgres
 --
 
 ALTER SEQUENCE public.Cars_id_seq OWNED BY public.Cars.id;
 
 
 --
--- Name: CarOwner id; Type: DEFAULT; Schema: public; Owner: Solmaz
+-- Name: CarOwner id; Type: DEFAULT; Schema: public; Owner: Postgres
 --
 
 ALTER TABLE ONLY public.CarOwner ALTER COLUMN id SET DEFAULT nextval('public.CarOwner_id_seq'::regclass);
 
 
 --
--- Name: Cars id; Type: DEFAULT; Schema: public; Owner: Solmaz
+-- Name: Cars id; Type: DEFAULT; Schema: public; Owner: Postgres
 --
 
 ALTER TABLE ONLY public.Cars ALTER COLUMN id SET DEFAULT nextval('public.Cars_id_seq'::regclass);
 
 
 --
--- Data for Name: CarOwner; Type: TABLE DATA; Schema: public; Owner: Solmaz
+-- Data for Name: CarOwner; Type: TABLE DATA; Schema: public; Owner: Postgres
 --
 
 COPY public.CarOwner (id, name, age, gender, Car_id) FROM stdin;
@@ -146,7 +146,7 @@ COPY public.CarOwner (id, name, age, gender, Car_id) FROM stdin;
 
 
 --
--- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: Solmaz
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: Postgres
 --
 
 COPY public.alembic_version (version_num) FROM stdin;
@@ -155,7 +155,7 @@ COPY public.alembic_version (version_num) FROM stdin;
 
 
 --
--- Data for Name: Cars; Type: TABLE DATA; Schema: public; Owner: Solmaz
+-- Data for Name: Cars; Type: TABLE DATA; Schema: public; Owner: Postgres
 --
 
 COPY public.Cars (id, Name, Produce_date) FROM stdin;
@@ -168,21 +168,21 @@ COPY public.Cars (id, Name, Produce_date) FROM stdin;
 
 
 --
--- Name: CarOwner_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Solmaz
+-- Name: CarOwner_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Postgres
 --
 
 SELECT pg_catalog.setval('public.CarOwner_id_seq', 6, true);
 
 
 --
--- Name: Cars_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Solmaz
+-- Name: Cars_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Postgres
 --
 
 SELECT pg_catalog.setval('public.Cars_id_seq', 5, true);
 
 
 --
--- Name: CarOwner CarOwner_pkey; Type: CONSTRAINT; Schema: public; Owner: Solmaz
+-- Name: CarOwner CarOwner_pkey; Type: CONSTRAINT; Schema: public; Owner: Postgres
 --
 
 ALTER TABLE ONLY public.CarOwner
@@ -190,7 +190,7 @@ ALTER TABLE ONLY public.CarOwner
 
 
 --
--- Name: alembic_version alembic_version_pkc; Type: CONSTRAINT; Schema: public; Owner: Solmaz
+-- Name: alembic_version alembic_version_pkc; Type: CONSTRAINT; Schema: public; Owner: Postgres
 --
 
 ALTER TABLE ONLY public.alembic_version
@@ -198,7 +198,7 @@ ALTER TABLE ONLY public.alembic_version
 
 
 --
--- Name: Cars Cars_pkey; Type: CONSTRAINT; Schema: public; Owner: Solmaz
+-- Name: Cars Cars_pkey; Type: CONSTRAINT; Schema: public; Owner: Postgres
 --
 
 ALTER TABLE ONLY public.Cars
@@ -206,7 +206,7 @@ ALTER TABLE ONLY public.Cars
 
 
 --
--- Name: CarOwner CarOwner_Car_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: Solmaz
+-- Name: CarOwner CarOwner_Car_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: Postgres
 --
 
 ALTER TABLE ONLY public.CarOwner

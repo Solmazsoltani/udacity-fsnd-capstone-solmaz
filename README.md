@@ -46,7 +46,7 @@ We recommend working within a virtual environment whenever using Python for proj
 
 Once you have your virtual environment setup and running, install dependencies by running:
 
-```bash
+```
 pip install -r requirements.txt
 ```
 
@@ -57,7 +57,12 @@ With Postgres running, restore a database using the `capstone.psql` file provide
 
 ``` CLI ``` you should be in the Directory of your psql file for example cd C:\Users\nx018125\Documents\GitHub\udacity-fsnd-capstone-solmaz
 
-createdb is a command line utility which you can run from bash and not from psql. To create a database from psql, use the create database statement like so:
+in CLI should be written :
+
+     psql -U postgres
+
+
+create database  is a command line utility which you can run from bash and not from psql. To create a database from psql, use the create database statement like so:
 
 create database [databasename];
 Note: be sure to always end your SQL statements with ;

@@ -88,8 +88,8 @@ ALTER TABLE public.alembic_version OWNER TO postgres;
 
 CREATE TABLE public.Autos (
     id integer NOT NULL,
-    title character varying,
-    release_date timestamp without time zone
+    name character varying,
+    produce_date timestamp without time zone
 );
 
 
@@ -158,7 +158,7 @@ COPY public.alembic_version (version_num) FROM stdin;
 -- Data for Name: Autos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.Autos (id, title, release_date) FROM stdin;
+COPY public.Autos (id, name, produce_date) FROM stdin;
 2	Pejot	2012-05-04 00:00:00
 3	Lamburgini	2010-05-14 00:00:00
 4	Benz	2019-09-11 00:00:00

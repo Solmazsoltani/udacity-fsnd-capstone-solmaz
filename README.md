@@ -73,6 +73,11 @@ create database [databasename];
 
 create database capstone;
 
+then u should come out by crt + c
+
+then open CLI and 
+you should be in the Directory of your psql file for example cd C:\Users\nx018125\Documents\GitHub\udacity-fsnd-capstone-solmaz
+
 psql capstone < capstone.psql postgres
 
 

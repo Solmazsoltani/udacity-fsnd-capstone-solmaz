@@ -37,12 +37,12 @@ class Auto(db.Model):
     __tablename__ = 'autos'
 
     id = Column(Integer, primary_key=True)
-    title = Column(String)
+    name = Column(String)
     release_date = Column(DateTime)
     buyers = relationship('Buyer', backref="auto", lazy=True)
 
-    def __init__(self, title, release_date):
-        self.title = title
+    def __init__(self, name, release_date):
+        self.name = name
         self.release_date = release_date
 
     def insert(self):
@@ -59,7 +59,7 @@ class Auto(db.Model):
     def format(self):
         return {
             'id': self.id,
-            'title': self.title,
+            'name': self.name,
             'release_date': self.release_date,
             'buyers': list(map(lambda buyer: buyer.format(), self.buyers))
         }
@@ -103,3 +103,5 @@ class Buyer(db.Model):
             'gender': self.gender,
             "auto_id": self.auto_id
         }
+
+

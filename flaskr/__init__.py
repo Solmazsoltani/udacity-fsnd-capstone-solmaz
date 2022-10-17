@@ -1,12 +1,13 @@
+
 import os
-from flask import Flask, request, abort, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
-from models import setup_db, Movie, Actor
-
-from auth.auth import AuthError, requires_auth
-
 from datetime import datetime
+
+from auth import AuthError, requires_auth
+from flask import Flask, abort, jsonify, request
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+
+from models import Auto, Buyer, setup_db
 
 
 def create_app(test_config=None):
@@ -28,108 +29,108 @@ def create_app(test_config=None):
         return response
 
     '''
-    GET /movies
-    Get all movies
+    GET /autos
+    Get all autos
 
-    Example Request: curl 'http://localhost:5000/movies'
+    Example Request: curl 'http://localhost:5000/autos'
 
     Expected Result:
     {
-        "movies": [
+        "autos": [
             {
-            "actors": [
+            "buyers": [
                 {
                 "age": 54,
                 "gender": "M",
                 "id": 1,
-                "movie_id": 2,
+                "auto_id": 2,
                 "name": "Tom Hanks"
                 },
                 {
                 "age": 45,
                 "gender": "M",
                 "id": 4,
-                "movie_id": 2,
+                "auto_id": 2,
                 "name": "Robert Downey, Jr."
                 },
                 {
                 "age": 45,
                 "gender": "F",
                 "id": 5,
-                "movie_id": 2,
+                "auto_id": 2,
                 "name": "Julia Roberts"
                 }
             ],
             "id": 2,
             "release_date": "Fri, 04 May 2012 00:00:00 GMT",
-            "title": "Yahşi Batı"
+            "title": "Benz"
             },
             ...
         ],
         "success": true
     }
     '''
-    @app.route('/movies', methods=['GET'])
-    @requires_auth('view:movies')
-    def retrieve_movies(payload):
-        movies = Movie.query.all()
-        movies = list(map(lambda movie: movie.format(), movies))
+    @app.route('/autos', methods=['GET'])
+    @requires_auth('view:autos')
+    def retrieve_autos(payload):
+        autos = Auto.query.all()
+        autos = list(map(lambda auto: auto.format(), autos))
         return jsonify({
             "success": True,
-            "movies": movies
+            "autos": autos
         })
 
     '''
-    GET /actors
-    Get all actors
+    GET /buyers
+    Get all buyers
 
-    Example Request: curl 'http://localhost:5000/actors'
+    Example Request: curl 'http://localhost:5000/buyers'
 
     Expected Result:
     {
-        "actors": [
+        "buyers": [
             {
             "age": 45,
             "gender": "M",
             "id": 6,
-            "movie_id": 1,
-            "name": "Cem Yılmaz"
+            "auto_id": 1,
+            "name": "Jack Hagen"
             },
             {
             "age": 54,
             "gender": "M",
             "id": 1,
-            "movie_id": 2,
-            "name": "Tom Hanks"
+            "auto_id": 2,
+            "name": "John Smidth"
             },
             {
             "age": 44,
             "gender": "M",
             "id": 2,
-            "movie_id": 3,
-            "name": "Brad Pitt"
+            "auto_id": 3,
+            "name": "Michael Brema"
             }
         ],
         "success": true
     }
     '''
-    @app.route('/actors', methods=['GET'])
-    @requires_auth('view:actors')
-    def retrieve_actors(payload):
-        actors = Actor.query.all()
-        actors = list(map(lambda actor: actor.format(), actors))
+    @app.route('/buyers', methods=['GET'])
+    @requires_auth('view:buyers')
+    def retrieve_buyers(payload):
+        buyers = Buyer.query.all()
+        buyers = list(map(lambda buyer: buyer.format(), buyers))
         return jsonify({
             "success": True,
-            "actors": actors
+            "buyers": buyers
         })
 
     '''
-    POST /movies
-    Creates a new movie.
+    POST /autos
+    Creates a new auto.
     Requires the title and release date.
 
     Example Request: (Create)
-    curl --location --request POST 'http://localhost:5000/movies' \
+    curl --location --request POST 'http://localhost:5000/autos' \
         --header 'Content-Type: application/json' \
         --data-raw '{
             "title": "Pek Yakında",
@@ -141,9 +142,9 @@ def create_app(test_config=None):
         "success": true
     }
     '''
-    @app.route('/movies', methods=['POST'])
-    @requires_auth('post:movies')
-    def create_movie(payload):
+    @app.route('/autos', methods=['POST'])
+    @requires_auth('post:autos')
+    def create_auto(payload):
         body = request.get_json()
 
         if body is None:
@@ -153,24 +154,24 @@ def create_app(test_config=None):
         release_date = body.get('release_date', None)
 
         if title is None or release_date is None:
-            abort(400, "Missing field for Movie")
+            abort(400, "Missing field for Auto")
 
-        movie = Movie(title=title,
+        auto = Auto(title=title,
                       release_date=release_date)
 
-        movie.insert()
+        auto.insert()
 
         return jsonify({
             "success": True
         })
 
         '''
-    POST /actors
-    Creates a new actor.
-    Requires the name, age and gender of the actor.
+    POST /buyers
+    Creates a new buyer.
+    Requires the name, age and gender of the buyer.
 
     Example Request: (Create)
-    curl --location --request POST 'http://localhost:5000/actors' \
+    curl --location --request POST 'http://localhost:5000/buyers' \
         --header 'Content-Type: application/json' \
         --data-raw '{
             "name": "Cem Yılmaz",
@@ -183,9 +184,9 @@ def create_app(test_config=None):
         "success": true
     }
     '''
-    @app.route('/actors', methods=['POST'])
-    @requires_auth('post:actors')
-    def create_actor(payload):
+    @app.route('/buyers', methods=['POST'])
+    @requires_auth('post:buyers')
+    def create_buyer(payload):
         body = request.get_json()
 
         if body is None:
@@ -194,51 +195,24 @@ def create_app(test_config=None):
         name = body.get('name', None)
         age = body.get('age', None)
         gender = body.get('gender', None)
-        movie_id = body.get('movie_id', None)
+        auto_id = body.get('auto_id', None)
 
-        if name is None or age is None or gender is None or movie_id is None:
-            abort(400, "Missing field for Actor")
+        if name is None or age is None or gender is None or auto_id is None:
+            abort(400, "Missing field for Buyer")
 
-        actor = Actor(name=name, age=age, gender=gender, movie_id=movie_id)
+        buyer = Buyer(name=name, age=age, gender=gender, auto_id=auto_id)
 
-        actor.insert()
+        buyer.insert()
 
         return jsonify({
             "success": True
         })
 
     '''
-    DELETE /movies/<int:movie_id>
-    Deletes the movie with given id
+    DELETE /autos/<int:auto_id>
+    Deletes the auto with given id
 
-    Example Request: curl --request DELETE 'http://localhost:5000/movies/1'
-
-    Example Response:
-    {
-        "deleted": 1,
-        "success": true
-    }
-    '''
-    @app.route('/movies/<int:movie_id>', methods=['DELETE'])
-    @requires_auth('delete:movies')
-    def delete_movie(payload, movie_id):
-        movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
-
-        if movie is None:
-            abort(404, "No movie with given id " + str(movie_id) + " is found")
-
-        movie.delete()
-
-        return jsonify({
-            'success': True,
-            'deleted': movie_id
-        })
-
-    '''
-    DELETE /actors/<int:actor_id>
-    Deletes the actor with given id
-
-    Example Request: curl --request DELETE 'http://localhost:5000/actors/1'
+    Example Request: curl --request DELETE 'http://localhost:5000/autos/1'
 
     Example Response:
     {
@@ -246,29 +220,56 @@ def create_app(test_config=None):
         "success": true
     }
     '''
-    @app.route('/actors/<int:actor_id>', methods=['DELETE'])
-    @requires_auth('delete:actors')
-    def delete_actor(payload, actor_id):
-        actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
+    @app.route('/autos/<int:auto_id>', methods=['DELETE'])
+    @requires_auth('delete:autos')
+    def delete_auto(payload, auto_id):
+        auto = Auto.query.filter(Auto.id == auto_id).one_or_none()
 
-        if actor is None:
-            abort(404, "No actor with given id " + str(actor_id) + " is found")
+        if auto is None:
+            abort(404, "No auto with given id " + str(auto_id) + " is found")
 
-        actor.delete()
+        auto.delete()
 
         return jsonify({
             'success': True,
-            'deleted': actor_id
+            'deleted': auto_id
         })
 
     '''
-    PATCH /movies/<movie_id>
-        Updates the movie where <movie_id> is the existing movie id
-        Responds with a 404 error if <movie_id> is not found
-        Update the corresponding fields for Movie with id <movie_id>
+    DELETE /buyers/<int:buyer_id>
+    Deletes the buyer with given id
+
+    Example Request: curl --request DELETE 'http://localhost:5000/buyers/1'
+
+    Example Response:
+    {
+        "deleted": 1,
+        "success": true
+    }
+    '''
+    @app.route('/buyers/<int:buyer_id>', methods=['DELETE'])
+    @requires_auth('delete:buyers')
+    def delete_buyer(payload, buyer_id):
+        buyer = Buyer.query.filter(Buyer.id == buyer_id).one_or_none()
+
+        if buyer is None:
+            abort(404, "No buyer with given id " + str(buyer_id) + " is found")
+
+        buyer.delete()
+
+        return jsonify({
+            'success': True,
+            'deleted': buyer_id
+        })
+
+    '''
+    PATCH /autos/<auto_id>
+        Updates the auto where <auto_id> is the existing auto id
+        Responds with a 404 error if <auto_id> is not found
+        Update the corresponding fields for Auto with id <auto_id>
 
     Example Request:
-    curl --location --request PATCH 'http://localhost:5000/movies/1' \
+    curl --location --request PATCH 'http://localhost:5000/autos/1' \
         --header 'Content-Type: application/json' \
         --data-raw '{
             "title": "Eyvah eyvah 2"
@@ -284,17 +285,17 @@ def create_app(test_config=None):
         }
     }
     '''
-    @app.route('/movies/<int:movie_id>', methods=['PATCH'])
-    @requires_auth('update:movies')
-    def update_movie(payload, movie_id):
+    @app.route('/autos/<int:auto_id>', methods=['PATCH'])
+    @requires_auth('update:autos')
+    def update_auto(payload, auto_id):
 
-        updated_movie = Movie.query.get(movie_id)
+        updated_auto = Auto.query.get(auto_id)
 
-        if not updated_movie:
+        if not updated_auto:
             abort(
                 404,
-                'Movie with id: ' +
-                str(movie_id) +
+                'Auto with id: ' +
+                str(auto_id) +
                 ' could not be found.')
 
         body = request.get_json()
@@ -303,25 +304,25 @@ def create_app(test_config=None):
         release_date = body.get('release_date', None)
 
         if title:
-            updated_movie.title = title
+            updated_auto.title = title
         if release_date:
-            updated_movie.release_date = release_date
+            updated_auto.release_date = release_date
 
-        updated_movie.update()
+        updated_auto.update()
 
         return jsonify({
             "success": True,
-            "updated": updated_movie.format()
+            "updated": updated_auto.format()
         })
 
     '''
-    PATCH /actors/<actor_id>
-        Updates the actor where <actor_id> is the existing actor id
-        Responds with a 404 error if <actor_id> is not found
-        Update the given fields for Actor with id <actor_id>
+    PATCH /buyers/<buyer_id>
+        Updates the buyer where <buyer_id> is the existing buyer id
+        Responds with a 404 error if <buyer_id> is not found
+        Update the given fields for Buyer with id <buyer_id>
 
     Example Request:
-    curl --location --request PATCH 'http://localhost:5000/actors/1' \
+    curl --location --request PATCH 'http://localhost:5000/buyers/1' \
         --header 'Content-Type: application/json' \
         --data-raw '{
             "name": "Tom Hanks"
@@ -338,17 +339,17 @@ def create_app(test_config=None):
         }
     }
     '''
-    @app.route('/actors/<int:actor_id>', methods=['PATCH'])
-    @requires_auth('update:actors')
-    def update_actor(payload, actor_id):
+    @app.route('/buyers/<int:buyer_id>', methods=['PATCH'])
+    @requires_auth('update:buyers')
+    def update_buyer(payload, buyer_id):
 
-        updated_actor = Actor.query.get(actor_id)
+        updated_buyer = Buyer.query.get(buyer_id)
 
-        if not updated_actor:
+        if not updated_buyer:
             abort(
                 404,
-                'Actor with id: ' +
-                str(actor_id) +
+                'Buyer with id: ' +
+                str(buyer_id) +
                 ' could not be found.')
 
         body = request.get_json()
@@ -356,28 +357,28 @@ def create_app(test_config=None):
         name = body.get('name', None)
         age = body.get('age', None)
         gender = body.get('gender', None)
-        movie_id = body.get('movie_id', None)
+        auto_id = body.get('auto_id', None)
 
         if name:
-            updated_actor.name = name
+            updated_buyer.name = name
         if age:
-            updated_actor.age = age
+            updated_buyer.age = age
         if gender:
-            updated_actor.gender = gender
-        if movie_id:
-            updated_actor.movie_id = movie_id
+            updated_buyer.gender = gender
+        if auto_id:
+            updated_buyer.auto_id = auto_id
 
         try:
-            updated_actor.update()
+            updated_buyer.update()
         except BaseException:
             abort(
                 400,
-                "Bad formatted request due to nonexistent movie id" +
-                str(movie_id))
+                "Bad formatted request due to nonexistent auto id" +
+                str(auto_id))
 
         return jsonify({
             "success": True,
-            "updated": updated_actor.format()
+            "updated": updated_buyer.format()
         })
 
     def get_error_message(error, default_message):
@@ -422,8 +423,9 @@ def create_app(test_config=None):
 
     return app
 
-
 APP = create_app()
 
 if __name__ == '__main__':
     APP.run(host='0.0.0.0', port=8080, debug=True)
+
+

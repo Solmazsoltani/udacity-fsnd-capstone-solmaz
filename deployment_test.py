@@ -4,6 +4,7 @@ import unittest
 
 import requests
 
+
 class CapstoneTestCase(unittest.TestCase):
 
     def setUp(self):

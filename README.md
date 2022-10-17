@@ -100,9 +100,9 @@ You need to setup an Auth0 account.
 Environment variables needed: (setup.sh)
 
 ```bash
-export AUTH0_DOMAIN="xxxxxxxxxx.auth0.com" # Choose your tenant domain
-export ALGORITHMS="RS256"
-export API_AUDIENCE="capstone" # Create an API in Auth0
+set AUTH0_DOMAIN="xxxxxxxxxx.auth0.com" # Choose your tenant domain
+set ALGORITHMS="RS256"
+set API_AUDIENCE="capstone" # Create an API in Auth0
 ```
 
 ##### Roles

@@ -2,11 +2,11 @@
 import os
 from datetime import datetime
 
-from auth import AuthError, requires_auth
 from flask import Flask, abort, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
+from auth import AuthError, requires_auth
 from models import Auto, Buyer, setup_db
 
 

@@ -174,9 +174,9 @@ For more details [look at the documentation (31.1.1.2. Connection URIs)](https:/
 5.  To run the server locally, execute:
 
     ```bash
-    export FLASK_APP=flaskr
-    export FLASK_DEBUG=True
-    export FLASK_ENVIRONMENT=debug
+    set FLASK_APP=flaskr
+    set FLASK_DEBUG=True
+    set FLASK_ENVIRONMENT=debug
     flask run --reload
     ```
 

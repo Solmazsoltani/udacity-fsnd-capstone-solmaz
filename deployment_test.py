@@ -4,6 +4,7 @@ import unittest
 
 import requests
 
+
 class CapstoneTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -26,11 +27,11 @@ class CapstoneTestCase(unittest.TestCase):
             self.auth = json.loads(f.read())
 
         assistant_jwt = self.auth["roles"]["Sell Assistant"]["jwt_token"]
-        director_jwt = self.auth["roles"]["Sell Manager"]["jwt_token"]
+        manager_jwt = self.auth["roles"]["Sell Manager"]["jwt_token"]
         producer_jwt = self.auth["roles"]["Executive Producer"]["jwt_token"]
         self.auth_headers = {
             "Sell Assistant": f'Bearer {assistant_jwt}',
-            "Sell Manager": f'Bearer {director_jwt}',
+            "Sell Manager": f'Bearer {manager_jwt}',
             "Executive Producer": f'Bearer {producer_jwt}'
         }
 
@@ -60,7 +61,7 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertTrue(data['success'])
         self.assertEqual(type(data["buyers"]), type([]))
 
-    def test_get_buyers_by_director(self):
+    def test_get_buyers_by_manager(self):
         header_obj = {
             "Authorization": self.auth_headers["Sell Manager"]
         }
@@ -140,6 +141,7 @@ class CapstoneTestCase(unittest.TestCase):
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
+
 
 
 

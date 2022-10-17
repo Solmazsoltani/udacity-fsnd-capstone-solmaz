@@ -1,5 +1,5 @@
 #!/bin/sh
-set AUTH0_DOMAIN="fsnd-kml.auth0.com"
+set AUTH0_DOMAIN="dev-gzxs9d5y.us.auth0.com"
 set ALGORITHMS="RS256"
 set API_AUDIENCE="capstone"
 

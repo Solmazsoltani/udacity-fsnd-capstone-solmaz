@@ -1,12 +1,12 @@
 
-import os
-from sqlalchemy import ForeignKey, Column, String, Integer, \
-                    DateTime, create_engine
-from sqlalchemy.orm import relationship
-from flask_sqlalchemy import SQLAlchemy
 import json
 import os
+
 from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import (Column, DateTime, ForeignKey, Integer, String,
+                        create_engine)
+from sqlalchemy.orm import relationship
 
 database_name = "capstone"
 # database_path = "postgres://{}/{}".format('localhost:5432', database_name)
@@ -39,7 +39,7 @@ class Auto(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     release_date = Column(DateTime)
-    buyers = relationship('Buyer', backref="auto", lazy=True)
+    buyers = relationship('Buyer', backref="autos", lazy=True)
 
     def __init__(self, name, release_date):
         self.name = name

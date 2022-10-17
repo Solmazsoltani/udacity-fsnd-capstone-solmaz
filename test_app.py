@@ -5,7 +5,8 @@ import unittest
 from flask_sqlalchemy import SQLAlchemy
 
 from flaskr import create_app
-from models import Buyer, Auto, setup_db
+from models import Auto, Buyer, setup_db
+
 
 class CapstoneTestCase(unittest.TestCase):
 

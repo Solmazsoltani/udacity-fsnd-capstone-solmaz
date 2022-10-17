@@ -4,7 +4,6 @@ import unittest
 
 import requests
 
-
 class CapstoneTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -26,12 +25,12 @@ class CapstoneTestCase(unittest.TestCase):
         with open('auth_config.json', 'r') as f:
             self.auth = json.loads(f.read())
 
-        assistant_jwt = self.auth["roles"]["Casting Assistant"]["jwt_token"]
-        director_jwt = self.auth["roles"]["Casting Director"]["jwt_token"]
+        assistant_jwt = self.auth["roles"]["Sell Assistant"]["jwt_token"]
+        director_jwt = self.auth["roles"]["Sell Manager"]["jwt_token"]
         producer_jwt = self.auth["roles"]["Executive Producer"]["jwt_token"]
         self.auth_headers = {
-            "Casting Assistant": f'Bearer {assistant_jwt}',
-            "Casting Director": f'Bearer {director_jwt}',
+            "Sell Assistant": f'Bearer {assistant_jwt}',
+            "Sell Manager": f'Bearer {director_jwt}',
             "Executive Producer": f'Bearer {producer_jwt}'
         }
 
@@ -41,7 +40,7 @@ class CapstoneTestCase(unittest.TestCase):
 
     def test_get_autos(self):
         header_obj = {
-            "Authorization": self.auth_headers["Casting Assistant"]
+            "Authorization": self.auth_headers["Sell Assistant"]
         }
         res = requests.get(self.api + '/autos', headers=header_obj)
         data = res.json()
@@ -52,7 +51,7 @@ class CapstoneTestCase(unittest.TestCase):
 
     def test_get_buyers(self):
         header_obj = {
-            "Authorization": self.auth_headers["Casting Assistant"]
+            "Authorization": self.auth_headers["Sell Assistant"]
         }
         res = requests.get(self.api + '/buyers', headers=header_obj)
         data = res.json()
@@ -63,7 +62,7 @@ class CapstoneTestCase(unittest.TestCase):
 
     def test_get_buyers_by_director(self):
         header_obj = {
-            "Authorization": self.auth_headers["Casting Director"]
+            "Authorization": self.auth_headers["Sell Manager"]
         }
         res = requests.get(self.api + '/buyers', headers=header_obj)
         data = res.json()
@@ -97,7 +96,7 @@ class CapstoneTestCase(unittest.TestCase):
 
     def test_create_autos_fail_403(self):
         header_obj = {
-            "Authorization": self.auth_headers["Casting Director"]
+            "Authorization": self.auth_headers["Sell Manager"]
         }
         auto_fail = {"title": "auto"}
         res = requests.post(
@@ -111,7 +110,7 @@ class CapstoneTestCase(unittest.TestCase):
 
     def test_create_buyers_fail_400(self):
         header_obj = {
-            "Authorization": self.auth_headers["Casting Director"]
+            "Authorization": self.auth_headers["Sell Manager"]
         }
         buyer_fail = {"name": "buyer"}
         res = requests.post(
@@ -126,7 +125,7 @@ class CapstoneTestCase(unittest.TestCase):
 
     def test_create_buyers_fail_403(self):
         header_obj = {
-            "Authorization": self.auth_headers["Casting Assistant"]
+            "Authorization": self.auth_headers["Sell Assistant"]
         }
         buyer_fail = {"name": "buyer"}
         res = requests.post(
@@ -141,5 +140,6 @@ class CapstoneTestCase(unittest.TestCase):
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
+
 
 
